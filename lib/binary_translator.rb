@@ -26,7 +26,29 @@ class BinaryTranslator
       "w" => "010111",
       "x" => "011000",
       "y" => "011001",
-      "z" => "011010"
+      "z" => "011010",
+      " " => "000000"
     }
+  end
+
+  def translate(letters)
+    string = ""
+    updated_letters = letters.downcase
+    updated_letters.chars.each do |letter|
+      if @alpha_to_binary.keys.include?(letter)
+        string << @alpha_to_binary[letter]
+      else
+        ""
+      end
+    end
+    string
+  end
+
+  def translate_to_text(binary)
+    new_array = binary.chars.each_slice(6).map(&:join)
+    reverse_text = new_array.map do |rev|
+      @alpha_to_binary.key(rev)
+    end
+    reverse_text.join
   end
 end
